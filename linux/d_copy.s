@@ -5,6 +5,8 @@
 
 #include "qasm.h"
 
+#if     id386
+
 	.data
 
 LCopyWidth:		.long	0
@@ -145,3 +147,4 @@ LLRowLoop:
 
 	ret
 
+#endif

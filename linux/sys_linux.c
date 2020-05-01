@@ -223,6 +223,8 @@ void *Sys_GetGameAPI (void *parms)
 	const char *gamename = "gamei386.so";
 #elif defined __alpha__
 	const char *gamename = "gameaxp.so";
+#elif defined __x86_64__
+	const char *gamename = "gamex86_64.so";
 #else
 #error Unknown arch
 #endif
