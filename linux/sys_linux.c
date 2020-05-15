@@ -91,7 +91,7 @@ void Sys_Quit (void)
 {
 	CL_Shutdown ();
 	Qcommon_Shutdown ();
-    fcntl (0, F_SETFL, fcntl (0, F_GETFL, 0) & ~FNDELAY);
+    fcntl (0, F_SETFL, fcntl (0, F_GETFL, 0) & ~O_NONBLOCK);
 	_exit(0);
 }
 
@@ -108,7 +108,7 @@ void Sys_Error (char *error, ...)
     char        string[1024];
 
 // change stdin to non blocking
-    fcntl (0, F_SETFL, fcntl (0, F_GETFL, 0) & ~FNDELAY);
+    fcntl (0, F_SETFL, fcntl (0, F_GETFL, 0) & ~O_NONBLOCK);
 
 	CL_Shutdown ();
 	Qcommon_Shutdown ();
@@ -299,11 +299,11 @@ int main (int argc, char **argv)
 
 	Qcommon_Init(argc, argv);
 
-	fcntl(0, F_SETFL, fcntl (0, F_GETFL, 0) | FNDELAY);
+	fcntl(0, F_SETFL, fcntl (0, F_GETFL, 0) | O_NONBLOCK);
 
 	nostdout = Cvar_Get("nostdout", "0", 0);
 	if (!nostdout->value) {
-		fcntl(0, F_SETFL, fcntl (0, F_GETFL, 0) | FNDELAY);
+		fcntl(0, F_SETFL, fcntl (0, F_GETFL, 0) | O_NONBLOCK);
 //		printf ("Linux Quake -- Version %0.3f\n", LINUX_VERSION);
 	}
 
